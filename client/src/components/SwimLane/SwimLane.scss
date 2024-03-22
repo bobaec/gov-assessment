@@ -1,0 +1,16 @@
+.swim-lane-container {
+    flex: 1 0 30%;
+    .swim-lane-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        border-radius: 10px;
+    }
+    .swim-lane-content-container {
+        margin-top: 20px;
+        height: 500px;
+        border-radius: 10px;
+        padding: 20px;
+    }
+}

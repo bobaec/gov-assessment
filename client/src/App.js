@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 
 import "./App.scss";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -15,6 +16,7 @@ function App() {
 
     return (
         <div className="website-container">
+            <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} />
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/login" element={isAuthenticated ? <Navigate replace to="/dashboard" /> : <Login setAuth={setAuth} />} />

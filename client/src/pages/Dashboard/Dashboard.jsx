@@ -1,13 +1,16 @@
 import React from 'react'
+import SwimLane from '../../components/SwimLane/SwimLane'
+import './Dashboard.scss';
 
 const Dashboard = ({ setAuth }) => {
   return (
     <div className="dashboard-page-container">
-      <h1>Dashboard</h1>
+      <h1 className="dashboard-title">#KANBAN</h1>
       <div className="kanban-container">
-        
+        <SwimLane type="available" />
+        <SwimLane type="low" />
+        <SwimLane type="out" />
       </div>
-      <button onClick={() => setAuth(false)}>Logout</button>
     </div>
   )
 }
