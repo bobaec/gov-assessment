@@ -1,0 +1,15 @@
+.dashboard-page-container {
+    .dashboard-title {
+        text-align: center;
+        margin: 10px 0;
+    }
+    .kanban-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 20px;
+        width: 90vw;
+        margin: auto;
+    }
+}
+

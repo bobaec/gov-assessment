@@ -1,0 +1,27 @@
+@use '../../utilities/styles/colors';
+
+@mixin remove-link-decorations {
+    color: black;
+    text-decoration: none;
+}
+
+.navbar-container {
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: beige;
+    .navbar-home {
+        padding-left: 20px;
+        @include remove-link-decorations;
+    }
+    .links-container {
+        display: flex;
+        justify-content: space-evenly;
+        .navbar-link {
+            margin: 0 20px;
+            @include remove-link-decorations;
+        }
+    }
+}
