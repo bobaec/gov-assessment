@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { PaintsProvider } from '../../contexts/PaintsProvider';
 import SwimLane from '../../components/SwimLane/SwimLane'
 import './Dashboard.scss';
 
-const Dashboard = ({ setAuth }) => {
+const Dashboard = () => {
   return (
-    <div className="dashboard-page-container">
-      <h1 className="dashboard-title">#KANBAN</h1>
-      <div className="kanban-container">
-        <SwimLane type="available" />
-        <SwimLane type="low" />
-        <SwimLane type="out" />
+    <PaintsProvider>
+      <div className="dashboard-page-container">
+        <h1 className="dashboard-title">Paint Inventory</h1>
+        <div className="kanban-container">
+          <SwimLane type="available" />
+          <SwimLane type="low" />
+          <SwimLane type="out" />
+        </div>
       </div>
-    </div>
+    </PaintsProvider>
+    
   )
 }
 

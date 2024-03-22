@@ -33,7 +33,7 @@ function App() {
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/login" element={isAuthenticated ? <Navigate replace to="/dashboard" /> : <Login setAuth={setAuth} />} />
-                <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard setAuth={setAuth} /> : <Navigate replace to="/login" />} />
+                <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate replace to="/login" />} />
             </Routes>
         </div>
     );
