@@ -3,7 +3,7 @@
 
 body {
     font-family: "Poppins", sans-serif;
-    // background-color: #282c34;
+    background-color: #282c34;
     margin: auto;
 }
 
@@ -17,4 +17,24 @@ body {
 
 .red {
     background-color: colors.$red;
+}
+
+.black {
+    background-color: colors.$black;
+}
+
+.blue {
+    background-color: colors.$blue;
+}
+
+.grey {
+    background-color: colors.$grey;
+}
+
+.white {
+    background-color: colors.$white;
+}
+
+.purple {
+    background-color: colors.$purple;
 }

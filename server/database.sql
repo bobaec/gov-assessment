@@ -28,13 +28,15 @@ CREATE TABLE Paints (
 INSERT INTO Roles (role_id, role_name) VALUES 
 (1, 'administrator'),
 (2, 'manager'),
-(3, 'painter');
+(3, 'painter'),
+(4, 'viewer');
 
 -- insert users
 INSERT INTO Users (user_name, user_email, user_password, role_id) VALUES 
 ('Adam', 'adam@gmail.com', '1', 1),
 ('Jane', 'jane@gmail.com', '1', 2),
-('John', 'john@gmail.com', '1', 3);
+('Painter', 'painter@gmail.com', '1', 3),
+('John', 'john@gmail.com', '1', 4);
 
 -- insert user roles
 INSERT INTO UserRoles (user_id, role_id) VALUES 
@@ -46,6 +48,6 @@ INSERT INTO UserRoles (user_id, role_id) VALUES
 INSERT INTO Paints (color, quantity) VALUES 
 ('Blue', 10),
 ('Grey', 10),
-('Black', 10),
-('White', 10),
-('Purple', 10);
+('Black', 5),
+('White', 2),
+('Purple', 0);
