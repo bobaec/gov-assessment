@@ -11,8 +11,21 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const setAuth = (boolean) => {
+        if (boolean) {
+            localStorage.setItem("authenticated", boolean);
+        } else {
+            localStorage.removeItem("authenticated");
+        }
         setIsAuthenticated(boolean);
     }
+
+    useEffect(() => {
+        if (!localStorage.getItem("authenticated")) {
+            localStorage.removeItem("authenticated");
+        } else {
+            setIsAuthenticated(localStorage.getItem("authenticated"))
+        }
+    }, [])
 
     return (
         <div className="website-container">
