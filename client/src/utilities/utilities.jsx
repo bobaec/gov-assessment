@@ -23,3 +23,33 @@ export const swimLaneTitle = (type) => {
             return 'Available';
     }
 }
+
+export const canUpdateInventory = (role) => {
+    switch (role) {
+        case 1:
+            return true;
+        case 2:
+            return true;
+        case 3:
+            return true;
+        case 4:
+            return false;
+        default:
+            return false;
+    }
+}
+
+export const canOrderBulk = (role) => {
+    switch (role) {
+        case 1:
+            return true;
+        case 2:
+            return true;
+        case 3:
+            return false;
+        case 4:
+            return false;
+        default:
+            return false;
+    }
+}

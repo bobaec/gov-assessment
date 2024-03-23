@@ -7,22 +7,42 @@ router.get("/", authorized, async (req, res) => {
         const paints = await pool.query(
             "SELECT * FROM Paints"
         )
-        // const checkQuantity = (quantity) => {
-        //     if (quantity >= 10) return 'available'
-        //     else if (quantity < 6) return 'low';
-        //     else return 'out';
-        // }
-        // const allPaints = await paints.rows;
-        // const paintQuantityCount = new Map();
-
-        // for (let i = 0; i < allPaints.length; i++) {
-        //     paintQuantityCount.set(paints.rows[i].color, checkQuantity(paints.rows[i].quantity));
-        // }
-        // console.log(paintQuantityCount)
         return res.json(paints.rows);
     } catch (error) {
         console.log('paints/', error.message);
     }
 });
+
+router.post('/update-single', authorized, async (req, res) => {
+    try {
+        const { color, quantity } = req.body;
+        const result = await pool.query(
+            "UPDATE Paints SET quantity = $1 WHERE color = $2", [quantity, color]
+        );
+        return res.json(true);
+    } catch (error) {
+        console.log('paints/update', error.message);
+    }
+});
+
+router.post('/update-bulk', authorized, async (req, res) => {
+    try {
+        const { blue, grey, black, white, purple } = req.body;
+        const result = await pool.query(
+            `UPDATE Paints SET quantity = CASE
+                WHEN color = 'Blue' THEN quantity + $1
+                WHEN color = 'Grey' THEN quantity + $2
+                WHEN color = 'Black' THEN quantity + $3
+                WHEN color = 'White' THEN quantity + $4
+                WHEN color = 'Purple' THEN quantity + $5
+                ELSE quantity
+                END
+            `, [blue, grey, black, white, purple]
+        );
+        return res.json(true);
+    } catch (error) {
+        console.log('paints/update', error.message);
+    }
+})
 
 module.exports = router;

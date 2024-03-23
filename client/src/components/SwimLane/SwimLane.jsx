@@ -5,8 +5,8 @@ import './SwimLane.scss';
 import Paints from '../Paints/Paints';
 
 const SwimLanes = ({ type }) => {
-  const paints = usePaints();
-  const paintInventory = paints[type];
+  const { sortedPaints } = usePaints();
+  const paintInventory = sortedPaints[type];
   return (
     <div className="swim-lane-container">
       <div className={`swim-lane-title ${swimLaneColor(type)}`}>{swimLaneTitle(type)}</div>
