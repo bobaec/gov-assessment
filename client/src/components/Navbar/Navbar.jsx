@@ -1,8 +1,9 @@
 import React from 'react'
 import './Navbar.scss';
 import { Link } from 'react-router-dom';
-const Navbar = ({ isAuthenticated, setAuth, user }) => {
-  console.log('navbar', user);
+import { useAuth } from '../../contexts/AuthContext';
+const Navbar = () => {
+  const { isAuthenticated, user, setAuth } = useAuth();
   return (
     <div className="navbar-container">
         <Link className="navbar-home" to="/">KANBAN</Link>

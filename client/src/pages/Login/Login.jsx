@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 
-const Login = ({ setAuth }) => {
+const Login = () => {
+  const { setAuth } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
