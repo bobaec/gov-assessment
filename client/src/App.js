@@ -8,21 +8,18 @@ import { useAuth } from "./contexts/AuthContext";
 import "./App.scss";
 
 function App() {
+    const { isAuthenticated } = useAuth();
+
     return (
         <div className="website-container">
             <Navbar />
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/dashboard" element={<DashboardPrivateRoute />} />
+                <Route exact path="/login" element={isAuthenticated ? <Navigate replace to="/dashboard" /> : <Login />} />
+                <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate replace to="/login" />} />
             </Routes>
         </div>
     );
-}
-
-function DashboardPrivateRoute() {
-    const { isAuthenticated } = useAuth();
-    return isAuthenticated ? <Dashboard /> : <Navigate to="/login" />;
 }
 
 export default App;

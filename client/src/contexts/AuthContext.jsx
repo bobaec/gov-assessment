@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState({});
 
@@ -12,21 +11,21 @@ export const AuthProvider = ({ children }) => {
         if (userData) {
             localStorage.setItem('authenticated', JSON.stringify(userData));
             setUser(userData.info);
-            navigate('/dashboard');
         } else {
             localStorage.removeItem('authenticated');
             setUser({});
-            navigate('/login');
         }
         setIsAuthenticated(userData);
     };
 
     useEffect(() => {
-        if (!localStorage.getItem("authenticated")) {
+        const cache = localStorage.getItem("authenticated");
+        if (!cache) {
             localStorage.removeItem("authenticated");
         } else {
-            setIsAuthenticated(localStorage.getItem("authenticated"))
-        }
+            setIsAuthenticated(JSON.parse(cache).authenticated);
+            setUser(JSON.parse(cache).info);
+        } 
     }, [])
 
     const authContextValue = {
