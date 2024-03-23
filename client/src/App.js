@@ -9,14 +9,16 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState({});
 
-    const setAuth = (boolean) => {
-        if (boolean) {
-            localStorage.setItem("authenticated", boolean);
+    const setAuth = (user) => {
+        if (user) {
+            localStorage.setItem("authenticated", JSON.stringify(user));
+            setUser(user.info);
         } else {
             localStorage.removeItem("authenticated");
         }
-        setIsAuthenticated(boolean);
+        setIsAuthenticated(user);
     }
 
     useEffect(() => {
@@ -29,7 +31,7 @@ function App() {
 
     return (
         <div className="website-container">
-            <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} />
+            <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} user={user} />
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/login" element={isAuthenticated ? <Navigate replace to="/dashboard" /> : <Login setAuth={setAuth} />} />

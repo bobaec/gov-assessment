@@ -20,9 +20,9 @@ export const PaintsProvider = ({ children }) => {
               out: [],
             }
             for (let i = 0; i < response.length; i++) {
-              if (response[i].quantity >= 10) {
+              if (response[i].quantity >= 7) {
                 quantities.available.push(response[i]);
-              } else if (response[i].quantity < 10 && response[i].quantity > 1) {
+              } else if (response[i].quantity < 7 && response[i].quantity > 0) {
                 quantities.low.push(response[i]);
               } else {
                 quantities.out.push(response[i]);

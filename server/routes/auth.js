@@ -4,15 +4,14 @@ const pool = require("../db");
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log('here', email, password);
         const user = await pool.query(
-            "SELECT * FROM users WHERE user_email = $1 AND user_password = $2",
+            "SELECT user_name, user_email, user_id, role_id FROM users WHERE user_email = $1 AND user_password = $2",
             [email, password]
         );
         if (user.rows.length === 0) {
-            return res.json(false);
+            return res.json({ authenticated: false });
         } else {
-            return res.json(true);
+            return res.json({ authenticated: true, info: user.rows[0] });
         }
     } catch (error) {
         console.log("login", error.message);

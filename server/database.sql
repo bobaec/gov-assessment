@@ -42,12 +42,13 @@ INSERT INTO Users (user_name, user_email, user_password, role_id) VALUES
 INSERT INTO UserRoles (user_id, role_id) VALUES 
 (1, 1),
 (2, 2),
-(3, 3);
+(3, 3),
+(4, 4);
 
 -- insert paints
 INSERT INTO Paints (color, quantity) VALUES 
 ('Blue', 10),
-('Grey', 10),
+('Grey', 7),
 ('Black', 5),
 ('White', 2),
 ('Purple', 0);
