@@ -1,3 +1,5 @@
+@use '../../utilities/styles/breakpoints';
+
 .swim-lane-container {
     flex: 1 0 30%;
     .swim-lane-title {
@@ -10,14 +12,42 @@
     .swim-lane-content-container {
         display: flex;
         margin-top: 20px;
-        height: 500px;
         border-radius: 10px;
         padding: 20px; 
         gap: 20px;
         border: 1px solid;
+        flex-wrap: wrap;
         .paints-container {
-            flex: 1 0 33%;
+            flex: 1 0 30%;
             height: fit-content;
         }
+    }
+}
+
+// large devices
+@media only screen and (min-width: breakpoints.$min-width-widescreen) {
+    .swim-lane-container {
+        flex: 1 0 30%;
+    }
+}
+
+// medium devices
+@media only screen and (min-width: breakpoints.$min-width-laptop) and (max-width: breakpoints.$max-width-laptop) {
+    .swim-lane-container {
+        flex: 0 0 40%;
+    }
+}
+
+// small devices
+@media only screen and (min-width: breakpoints.$min-width-tablet) and (max-width: breakpoints.$max-width-tablet) {
+    .swim-lane-container {
+        flex: 1 0 50%;
+    }
+}
+
+// extra small devices
+@media only screen and (max-width: breakpoints.$max-width-mobile) {
+    .swim-lane-container {
+        flex: 1 0 50%;
     }
 }
