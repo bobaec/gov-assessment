@@ -4,6 +4,24 @@
     border-radius: 10px;
     box-shadow: #64646f33 0px 7px 29px 0px;
     padding: 10px;
+    .paint-color {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        svg {
+            cursor: pointer;
+        }
+    }
+    .button-containers {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+        border-top: 1px solid;
+        padding-top: 5px;
+        svg {
+            cursor: pointer;
+        }
+    }
 }
 
 .paint-container:hover {

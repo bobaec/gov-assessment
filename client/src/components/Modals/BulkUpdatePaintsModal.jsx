@@ -3,7 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { usePaints } from '../../contexts/PaintsProvider';
 
-const BulkUpdateModal = ({ showModal, setShowModal }) => {
+const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
+    const { getPaints } = usePaints();
     const [updatedPaintQuantities, setUpdatedPaintQuantities] = useState({
         blue: 0,
         grey: 0,
@@ -26,7 +27,7 @@ const BulkUpdateModal = ({ showModal, setShowModal }) => {
             })
             const response = await result.json();
             close();
-            window.location.reload();
+            getPaints();
         } catch (error) {
             console.log('updatePaintQuantity', error.message);
         }
@@ -69,4 +70,4 @@ const BulkUpdateModal = ({ showModal, setShowModal }) => {
     )
 }
 
-export default BulkUpdateModal;
+export default BulkUpdatePaintsModal;
