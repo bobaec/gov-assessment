@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { usePaints } from '../../contexts/PaintsProvider';
 
 const PaintModal = ({ show, setShow, paint }) => {
     const [paintQuantity, setPaintQuantity] = useState(paint.quantity)
-    const close = () => {
-        setShow(false);
-    }
-
+    const { getPaints } = usePaints();
     const updatePaintQuantity = async () => {
         try {
-            console.log(paintQuantity);
             const result = await fetch('http://localhost:5000/paints/update-single', {
                 method: "POST",
                 headers: {
@@ -19,15 +16,14 @@ const PaintModal = ({ show, setShow, paint }) => {
                 body: JSON.stringify({color: paint.color, quantity: paintQuantity}),
             })
             const response = await result.json();
-            close();
-            window.location.reload();
+            setShow(false);
+            getPaints();
         } catch (error) {
             console.log('updatePaintQuantity', error.message);
         }
-
     }
   return (
-    <Modal show={show} onHide={close}>
+    <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
             <Modal.Title>Update {paint.color}</Modal.Title>
         </Modal.Header>
@@ -38,7 +34,7 @@ const PaintModal = ({ show, setShow, paint }) => {
             </div>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="secondary" onClick={close}>
+            <Button variant="secondary" onClick={() => setShow(false)}>
                 Close
             </Button>
             <Button variant="primary" onClick={() => updatePaintQuantity()}>
