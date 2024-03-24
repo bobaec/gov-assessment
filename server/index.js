@@ -9,6 +9,7 @@ app.use(cors());
 
 // routes
 app.use('/auth', require('./routes/auth'));
+app.use('/admin', require('./routes/admin'));
 app.use('/paints', require('./routes/paints'));
 
 app.listen(5000, () => {
