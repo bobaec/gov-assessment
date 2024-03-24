@@ -53,3 +53,22 @@ export const canOrderBulk = (role) => {
             return false;
     }
 }
+
+export const isAdministrator = (role) => {
+    return role === 1;
+}
+
+export const userRole = (role) => {
+    switch (role) {
+        case 1:
+            return 'Administrator';
+        case 2:
+            return 'Manager';
+        case 3:
+            return 'Painter';
+        case 4:
+            return 'Viewer';
+        default:
+            return 'Viewer';
+    }
+}

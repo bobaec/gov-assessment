@@ -18,7 +18,7 @@ const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
     }
     const updateBulkPaintQuantity = async () => {
         try {
-            const result = await fetch('http://localhost:5000/paints/update-bulk', {
+            const result = await fetch('/paints/update-bulk', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

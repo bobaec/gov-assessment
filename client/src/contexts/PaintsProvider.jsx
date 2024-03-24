@@ -10,7 +10,7 @@ export const PaintsProvider = ({ children }) => {
 
   const getPaints = async () => {
     try {
-      const results = await fetch('http://localhost:5000/paints/', {
+      const results = await fetch('/paints/', {
       method: "GET",
       })
       const response = await results.json();

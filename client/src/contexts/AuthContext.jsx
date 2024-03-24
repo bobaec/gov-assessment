@@ -1,11 +1,12 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { isAdministrator } from '../utilities/utilities';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState({});
+    const [allUsers, setAllUsers] = useState({});
 
     const setAuth = (userData) => {
         if (userData) {
@@ -18,6 +19,19 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(userData);
     };
 
+    const getAllUsers = async () => {
+        try {
+            const result = await fetch("/admin/all-users", {
+                method: "GET",
+            });
+            const response = await result.json();
+            const sortedUsersArray = response.sort((a, b) => a.user_id - b.user_id);
+            setAllUsers(sortedUsersArray);
+        } catch (error) {
+            console.log('getAllUsers', error.message);
+        }
+    }
+
     useEffect(() => {
         const cache = localStorage.getItem("authenticated");
         if (!cache) {
@@ -25,13 +39,18 @@ export const AuthProvider = ({ children }) => {
         } else {
             setIsAuthenticated(JSON.parse(cache).authenticated);
             setUser(JSON.parse(cache).info);
-        } 
+            if (isAdministrator(JSON.parse(cache).info.role_id)) {
+                getAllUsers();
+            }
+        }
     }, [])
 
     const authContextValue = {
         isAuthenticated,
         user,
         setAuth,
+        getAllUsers,
+        allUsers,
     };
 
     return (
