@@ -25,7 +25,8 @@ export const AuthProvider = ({ children }) => {
                 method: "GET",
             });
             const response = await result.json();
-            setAllUsers(response);
+            const sortedUsersArray = response.sort((a, b) => a.user_id - b.user_id);
+            setAllUsers(sortedUsersArray);
         } catch (error) {
             console.log('getAllUsers', error.message);
         }

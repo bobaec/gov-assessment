@@ -3,7 +3,16 @@
     padding: 20px;
     background-color: beige;
     border-radius: 10px;
-    .admins-container {
-
-    }
+    .admin-table-body-container {
+        .admin-table-row-container {
+            .admin-table-data-role-container {
+                button {
+                    width: 150px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+            }
+        }
+    }  
 }
