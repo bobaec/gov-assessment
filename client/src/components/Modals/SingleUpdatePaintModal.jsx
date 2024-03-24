@@ -8,7 +8,7 @@ const PaintModal = ({ show, setShow, paint }) => {
     const { getPaints } = usePaints();
     const updatePaintQuantity = async () => {
         try {
-            const result = await fetch('http://localhost:5000/paints/update-single', {
+            const result = await fetch('/paints/update-single', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

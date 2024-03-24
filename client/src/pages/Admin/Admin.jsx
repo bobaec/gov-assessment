@@ -11,7 +11,7 @@ const Admin = () => {
 
     const onEnabledChange = async (e, user) => {
         try {
-            const result = await fetch("http://localhost:5000/admin/enable-or-disable-user", {
+            const result = await fetch("/admin/enable-or-disable-user", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
@@ -26,7 +26,7 @@ const Admin = () => {
 
     const onRoleChange = async (e, user) => {
         try {
-            const result = await fetch("http://localhost:5000/admin/change-role", {
+            const result = await fetch("/admin/change-role", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

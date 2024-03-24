@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     const getAllUsers = async () => {
         try {
-            const result = await fetch("http://localhost:5000/admin/all-users", {
+            const result = await fetch("/admin/all-users", {
                 method: "GET",
             });
             const response = await result.json();
@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }) => {
         } else {
             setIsAuthenticated(JSON.parse(cache).authenticated);
             setUser(JSON.parse(cache).info);
-        }
-        if (isAdministrator(JSON.parse(cache).info.role_id)) {
-            getAllUsers();
+            if (isAdministrator(JSON.parse(cache).info.role_id)) {
+                getAllUsers();
+            }
         }
     }, [])
 

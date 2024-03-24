@@ -17,7 +17,7 @@ const Paints = ({ paint }) => {
 
   const addByOne = async (color) => {
     try {
-      const result = await fetch("http://localhost:5000/paints/update-add-by-one", {
+      const result = await fetch("/paints/update-add-by-one", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -32,7 +32,7 @@ const Paints = ({ paint }) => {
 
   const subtractByOne = async (color) => {
     try {
-      const result = await fetch("http://localhost:5000/paints/update-subtract-by-one", {
+      const result = await fetch("/paints/update-subtract-by-one", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
