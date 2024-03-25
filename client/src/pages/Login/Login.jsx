@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
+import "./Login.scss";
 
 const Login = () => {
   const { setAuth } = useAuth();
@@ -12,11 +16,13 @@ const Login = () => {
   const { email, password } = credentials;
 
   const onCredentialsChange = (e) => {
+    console.log(e.target.name);
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   }
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    console.log(credentials);
     try {
       const response = await fetch('/auth/login', {
         method: "POST",
@@ -26,8 +32,9 @@ const Login = () => {
         body: JSON.stringify(credentials),
       })
       const result = await response.json();
-      setAuth(result);
-      if (!result) {
+      if (result.authenticated) {
+        setAuth(result);
+      } else {
         setShowInvalidCredentials(true);
       }
     } catch (error) {
@@ -36,15 +43,25 @@ const Login = () => {
   }
   return (
     <div className="login-page-container">
-      <h1>Login</h1>
-      <form onSubmit={onSubmitForm}>
-        <input type="email" name="email" placeholder="Enter your password" value={email} onChange={(e) => onCredentialsChange(e)} />
-        <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => onCredentialsChange(e)} />
-        <button type="submit">Authenticate</button>
-      </form>
-      {showInvalidCredentials ? (
-        <div>Invalid Credentials</div>
-      ) : null}
+      <h1 className="login-page-title">Login</h1>
+      <Form onSubmit={onSubmitForm}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" name="email" placeholder="Enter email" value={email} onChange={onCredentialsChange} required />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" name="password" placeholder="Password" onChange={onCredentialsChange} required/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+        {showInvalidCredentials ? (
+          <div className="invalid-credentials-container">
+            Invalid Credentials, please try again.
+          </div>
+        ) : null}
+      </Form>
     </div>
   )
 }
