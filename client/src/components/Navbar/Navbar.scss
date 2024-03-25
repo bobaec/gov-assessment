@@ -1,4 +1,5 @@
 @use '../../utilities/styles/colors';
+@use '../../utilities/styles/breakpoints';
 
 @mixin remove-link-decorations {
     color: colors.$white;
@@ -9,19 +10,40 @@
     width: 100vw;
     height: 70px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: colors.$black;
     .navbar-home {
-        padding-left: 20px;
         @include remove-link-decorations;
     }
     .links-container {
         display: flex;
-        justify-content: space-evenly;
         .navbar-link {
             margin: 0 20px;
             @include remove-link-decorations;
+        }
+    }
+}
+
+@media only screen and (max-width: breakpoints.$max-width-mobile) {
+    .navbar-container {
+        flex-direction: column;
+        justify-content: center;
+        .links-container {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+}
+
+@media only screen and (min-width: breakpoints.$min-width-tablet) {
+    .navbar-container {
+        .navbar-home {
+            padding-left: 20px;
+        }
+        justify-content: space-between;
+        .links-container {
+            justify-content: space-evenly;
         }
     }
 }

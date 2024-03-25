@@ -59,7 +59,7 @@ const Admin = () => {
     return (
         <div className="admin-page-container">
             <h1>Admin</h1>
-            <Table striped bordered hover>
+            <Table striped bordered hover responsive>
                 <thead>
                     <tr>
                         <th>ID</th>

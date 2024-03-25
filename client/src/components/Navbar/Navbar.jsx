@@ -10,8 +10,8 @@ const Navbar = () => {
     <div className="navbar-container">
         <Link className="navbar-home" to="/">KANBAN</Link>
         <div className="links-container">
-            <div className="navbar-link">{user.user_name}</div>
-            <Link className="navbar-link" to="/dashboard">Dashboard</Link>
+            {isAuthenticated ? <div className="navbar-link">{user.user_name}</div> : null}
+            {isAuthenticated ? <Link className="navbar-link" to="/dashboard">Dashboard</Link> : null}
             {isAdministrator(user.role_id) ? <Link className="navbar-link" to="/admin">Admin</Link> : null}
             {!isAuthenticated ? (
                 <Link className="navbar-link" to="/login">Login</Link>
