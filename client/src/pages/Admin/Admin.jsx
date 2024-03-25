@@ -57,7 +57,7 @@ const Admin = () => {
                     </tr>
                 </thead>
                 <tbody className="admin-table-body-container">
-                    {allUsers.map((user) => {
+                    {allUsers.length > 0 && allUsers?.map((user) => {
                     return (
                         <tr className="admin-table-row-container" key={user.user_id}>
                             <td>
