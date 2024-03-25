@@ -22,7 +22,6 @@ const Login = () => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    console.log(credentials);
     try {
       const response = await fetch('/auth/login', {
         method: "POST",
