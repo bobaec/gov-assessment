@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 import { usePaints } from '../../contexts/PaintsProvider';
 
 const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
     const { getPaints } = usePaints();
-    const [updatedPaintQuantities, setUpdatedPaintQuantities] = useState({
+    const resetQuantities = {
         blue: 0,
         grey: 0,
         black: 0,
         white: 0,
         purple: 0,
-    });
+    }
+    const [updatedPaintQuantities, setUpdatedPaintQuantities] = useState(resetQuantities);
 
     const close = () => {
         setShowModal(false);
+        setUpdatedPaintQuantities(resetQuantities)
     }
     const updateBulkPaintQuantity = async () => {
         try {
@@ -28,6 +32,7 @@ const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
             const response = await result.json();
             close();
             getPaints();
+            setUpdatedPaintQuantities(resetQuantities)
         } catch (error) {
             console.log('updatePaintQuantity', error.message);
         }
@@ -35,11 +40,15 @@ const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
 
     const inputValues = (color) => {
         return (
-            <input 
-                type="number" 
-                value={updatedPaintQuantities[color]} 
-                onChange={(e) => setUpdatedPaintQuantities({...updatedPaintQuantities, [color]: parseInt(e.target.value)})}
-            />
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>{color.charAt(0).toUpperCase() + color.slice(1)}:</Form.Label>
+                <Form.Control 
+                    type="number" 
+                    name="number" 
+                    value={updatedPaintQuantities[color]} 
+                    onChange={(e) => setUpdatedPaintQuantities({...updatedPaintQuantities, [color]: parseInt(e.target.value)})}
+                />
+            </Form.Group>
         )
     }
 
@@ -49,14 +58,13 @@ const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
                 <Modal.Title>Update Paints in Bulk</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div>Enter the value you wish to add paints to.
-                </div>
-                <div className="blue-input-container">Blue: {inputValues('blue')}</div>
-                <div className="grey-input-container">Grey: {inputValues('grey')}</div>
-                <div className="black-input-container">Black:  {inputValues('black')}</div>
-                <div className="white-input-container">White:  {inputValues('white')}</div>
-                <div className="purple-input-container">Purple: {inputValues('purple')}</div>
-
+            <Form>
+                {inputValues('blue')}
+                {inputValues('grey')}
+                {inputValues('black')}
+                {inputValues('white')}
+                {inputValues('purple')}
+            </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={close}>
