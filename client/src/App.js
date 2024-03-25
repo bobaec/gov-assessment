@@ -16,7 +16,7 @@ function App() {
         <div className="website-container">
             <Navbar />
             <Routes>
-                <Route exact path="/" element={<Home />} />
+                <Route exact path="/" element={isAuthenticated ? <Navigate replace to="/dashboard" /> : <Login />} />
                 <Route exact path="/login" element={isAuthenticated ? <Navigate replace to="/dashboard" /> : <Login />} />
                 <Route exact path="/admin" element={isAuthenticated && isAdministrator(user.role_id) ? <Admin /> : <Navigate replace to="/login" />} />
                 <Route exact path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate replace to="/login" />} />
