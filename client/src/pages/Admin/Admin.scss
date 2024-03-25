@@ -5,6 +5,9 @@
     border-radius: 10px;
     .admin-table-body-container {
         .admin-table-row-container {
+            svg {
+                cursor: pointer;
+            }
             .admin-table-data-role-container {
                 button {
                     width: 150px;

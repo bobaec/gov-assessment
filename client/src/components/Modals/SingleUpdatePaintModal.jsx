@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { usePaints } from '../../contexts/PaintsProvider';
 
-const PaintModal = ({ show, setShow, paint }) => {
+const SingleUpdatePaintModal = ({ show, setShow, paint }) => {
     const [paintQuantity, setPaintQuantity] = useState(paint.quantity)
     const { getPaints } = usePaints();
     const updatePaintQuantity = async () => {
@@ -49,4 +49,4 @@ const PaintModal = ({ show, setShow, paint }) => {
   )
 }
 
-export default PaintModal
+export default SingleUpdatePaintModal;

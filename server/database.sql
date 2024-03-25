@@ -19,21 +19,18 @@ CREATE TABLE Paints (
     quantity INT NOT NULL
 );
 
--- insert roles
 INSERT INTO Roles (role_id, role_name) VALUES 
 (1, 'administrator'),
 (2, 'manager'),
 (3, 'painter'),
 (4, 'viewer');
 
--- insert users
 INSERT INTO Users (user_name, user_email, user_password, role_id) VALUES 
 ('Adam', 'adam@gmail.com', '1', 1),
 ('Jane', 'jane@gmail.com', '1', 2),
 ('Painter', 'painter@gmail.com', '1', 3),
 ('John', 'john@gmail.com', '1', 4);
 
--- insert paints
 INSERT INTO Paints (color, quantity) VALUES 
 ('Blue', 10),
 ('Grey', 7),

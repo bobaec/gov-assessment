@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faEdit,
+} from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from '../../contexts/AuthContext';
 import './Admin.scss';
 import { userRole } from '../../utilities/utilities';
+import AdminModal from '../../components/Modals/AdminModal';
 
 const Admin = () => {
     const { getAllUsers, allUsers } = useAuth();
-    
+    const [showModal, setShowModal] = useState(false);
+    const [editType, setEditType] = useState("");
+    const [userInfo, setUserInfo] = useState({});
     useEffect(() => {
         getAllUsers();
     }, [])
@@ -43,6 +50,12 @@ const Admin = () => {
         }
     }
 
+    const onUserInfoChange = async (user, type) => {
+        setShowModal(true);
+        setEditType(type);
+        setUserInfo(user);
+    }
+
     return (
         <div className="admin-page-container">
             <h1>Admin</h1>
@@ -65,9 +78,12 @@ const Admin = () => {
                             </td>
                             <td>
                                 {user.user_name}
+                                <FontAwesomeIcon icon={faEdit} onClick={() => onUserInfoChange(user, "name")}/>
                             </td>
                             <td>
                                 {user.user_email}
+                                <FontAwesomeIcon icon={faEdit} onClick={() => onUserInfoChange(user, "email")}/>
+
                             </td>
                             <td className="admin-table-data-role-container">
                                 <DropdownButton id="dropdown-basic-button" title={userRole(user.role_id)} onSelect={(e) => onRoleChange(e, user)} >
@@ -83,6 +99,7 @@ const Admin = () => {
                     })}
                 </tbody>
             </Table>
+            <AdminModal show={showModal} setShow={setShowModal} userInfo={userInfo} editType={editType} onSave={getAllUsers} />
         </div>
     )
 }
