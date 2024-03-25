@@ -1,8 +1,8 @@
 Technical Assessment
 
-Stack: PostgreSQL, Express, Node.js, React
-Front-end: React, Bootstrap, SASS/LESS
-Back-end: CorsExpress, pg
+Stack: PostgreSQL, Express, Node.js, React<br/>
+Front-end libraries: React, Bootstrap, SASS/LESS<br/>
+Back-end libraries: Cors, Express, pg
 Hosted on: AWS EC2
 
 How to run and install locally
