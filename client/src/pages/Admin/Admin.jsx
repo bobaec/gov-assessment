@@ -8,6 +8,10 @@ import { userRole } from '../../utilities/utilities';
 
 const Admin = () => {
     const { getAllUsers, allUsers } = useAuth();
+    
+    useEffect(() => {
+        getAllUsers();
+    }, [])
 
     const onEnabledChange = async (e, user) => {
         try {
