@@ -12,7 +12,7 @@ const Login = () => {
     password: "",
   });
   const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
-
+  const [showDisabledUser, setShowDisabledUser] = useState(false);
   const { email, password } = credentials;
 
   const onCredentialsChange = (e) => {
@@ -31,10 +31,14 @@ const Login = () => {
         body: JSON.stringify(credentials),
       })
       const result = await response.json();
-      if (result.authenticated) {
+      if (result.authenticated && result.info.is_enabled) {
         setAuth(result);
       } else {
-        setShowInvalidCredentials(true);
+        if (result.authenticated && !result.info.is_enabled) {
+          setShowDisabledUser(true);
+        } else {
+          setShowInvalidCredentials(true);
+        }
       }
     } catch (error) {
       console.log('onSubmitForm - login', error.message);
@@ -58,6 +62,11 @@ const Login = () => {
         {showInvalidCredentials ? (
           <div className="invalid-credentials-container">
             Invalid Credentials, please try again.
+          </div>
+        ) : null}
+        {showDisabledUser ? (
+          <div className="disabled-user-container">
+            User is disabled, please contact your administrators.
           </div>
         ) : null}
       </Form>

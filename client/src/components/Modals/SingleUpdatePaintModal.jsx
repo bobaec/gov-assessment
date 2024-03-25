@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import { usePaints } from '../../contexts/PaintsProvider';
 
 const PaintModal = ({ show, setShow, paint }) => {
@@ -28,10 +29,13 @@ const PaintModal = ({ show, setShow, paint }) => {
             <Modal.Title>Update {paint.color}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <div>{paint.color} has {paint.quantity} paints in stock.</div>
-            <div>Enter the value you wish to update paints to:
-                <input type="number" value={paintQuantity} onChange={(e) => setPaintQuantity(e.target.value)}></input>
-            </div>
+            <div>{paint.color} currently has {paint.quantity} paints in stock.</div>
+            <Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Enter the value you wish to update {paint.color} to:</Form.Label>
+                    <Form.Control type="number" name="number" value={paintQuantity} onChange={(e) => setPaintQuantity(e.target.value)} required />
+                </Form.Group>
+            </Form>
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={() => setShow(false)}>
