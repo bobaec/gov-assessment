@@ -65,6 +65,7 @@ const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
                 {inputValues('white')}
                 {inputValues('purple')}
             </Form>
+            <div>Whatever number (positive or negative) you enter in these fields will be added to the current stock of paint.</div>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={close}>
