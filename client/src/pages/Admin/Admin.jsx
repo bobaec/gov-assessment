@@ -3,9 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faEdit,
-} from "@fortawesome/free-solid-svg-icons";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from '../../contexts/AuthContext';
 import './Admin.scss';
 import { userRole } from '../../utilities/utilities';
@@ -16,6 +14,7 @@ const Admin = () => {
     const [showModal, setShowModal] = useState(false);
     const [editType, setEditType] = useState("");
     const [userInfo, setUserInfo] = useState({});
+
     useEffect(() => {
         getAllUsers();
     }, [])
@@ -29,6 +28,10 @@ const Admin = () => {
                 },
                 body: JSON.stringify({userId: user.user_id, isEnabled: !user.is_enabled}),
             });
+            const response = await result.json();
+            if (!response.success) {
+                throw new Error('Could not update user');
+            }
             getAllUsers();
         } catch (error) {
             console.log('onEnabledChange', error.message);
@@ -44,6 +47,10 @@ const Admin = () => {
                 },
                 body: JSON.stringify({userId: user.user_id, role: e.toLowerCase()})
             });
+            const response = await result.json();
+            if (!response.success) {
+                throw new Error('Could not update user');
+            }
             getAllUsers();
         } catch (error) {
             console.log('onRoleChange', error.message);

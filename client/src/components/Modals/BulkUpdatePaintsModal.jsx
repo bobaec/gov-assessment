@@ -30,9 +30,13 @@ const BulkUpdatePaintsModal = ({ showModal, setShowModal }) => {
                 body: JSON.stringify(updatedPaintQuantities),
             })
             const response = await result.json();
-            close();
-            getPaints();
-            setUpdatedPaintQuantities(resetQuantities)
+            if (!response.success) {
+                throw new Error('Could not update paints in bulk');
+            } else {
+                close();
+                getPaints();
+                setUpdatedPaintQuantities(resetQuantities)
+            }
         } catch (error) {
             console.log('updatePaintQuantity', error.message);
         }

@@ -15,6 +15,7 @@ const AdminModal = ({ show, setShow, userInfo, editType, onSave}) => {
     }, [userInfo]);
 
     const updateUserInfo = async () => {
+        // takes in editType to to update either name or email in the administrator's page
         try {
             const result = await fetch(`/admin/update-${editType}`, {
                 method: "POST",
@@ -24,9 +25,13 @@ const AdminModal = ({ show, setShow, userInfo, editType, onSave}) => {
                 body: JSON.stringify({userId: userInfo.user_id, [editType]: currentValue}),
             })
             const response = await result.json();
-            setShow(false);
-            setCurrentValue("");
-            onSave();
+            if (!response.success) {
+                throw new Error('Could not update user');
+            } else {
+                setShow(false);
+                setCurrentValue("");
+                onSave();
+            }
         } catch (error) {
             console.log('updateUserInfo', error.message);
         }

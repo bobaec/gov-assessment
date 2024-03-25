@@ -24,6 +24,10 @@ const Paints = ({ paint }) => {
         },
         body: JSON.stringify({color})
       });
+      const response = await result.json();
+      if (!response.success) {
+        throw new Error('Could not add paint by one');
+      }
       getPaints();
     } catch (error) {
       console.log('addByOne', error.message);
@@ -38,7 +42,11 @@ const Paints = ({ paint }) => {
           "Content-type": "application/json",
         },
         body: JSON.stringify({color})
-      })
+      });
+      const response = await result.json();
+      if (!response.success) {
+        throw new Error('Could not subtract paint by one');
+      }
       getPaints();
     } catch (error) {
       console.log('addByOne', error.message);

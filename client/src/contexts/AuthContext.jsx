@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({});
     const [allUsers, setAllUsers] = useState({});
 
+    // use localStorage for caching user
+
     const setAuth = (userData) => {
         if (userData) {
             localStorage.setItem('authenticated', JSON.stringify(userData));
@@ -25,8 +27,12 @@ export const AuthProvider = ({ children }) => {
                 method: "GET",
             });
             const response = await result.json();
-            const sortedUsersArray = response.sort((a, b) => a.user_id - b.user_id);
-            setAllUsers(sortedUsersArray);
+            if (!response) {
+                throw new Error('Could not get all users');
+            } else {
+                const sortedUsersArray = response.sort((a, b) => a.user_id - b.user_id);
+                setAllUsers(sortedUsersArray);
+            }
         } catch (error) {
             console.log('getAllUsers', error.message);
         }

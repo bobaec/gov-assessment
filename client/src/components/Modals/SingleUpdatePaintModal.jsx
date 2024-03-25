@@ -17,8 +17,12 @@ const SingleUpdatePaintModal = ({ show, setShow, paint }) => {
                 body: JSON.stringify({color: paint.color, quantity: paintQuantity}),
             })
             const response = await result.json();
-            setShow(false);
-            getPaints();
+            if (!response.success) {
+                throw new Error('Could not update paint quantity');
+            } else {
+                setShow(false);
+                getPaints();
+            }
         } catch (error) {
             console.log('updatePaintQuantity', error.message);
         }

@@ -52,6 +52,8 @@ router.post('/update-single', authorized, async (req, res) => {
 router.post('/update-bulk', authorized, async (req, res) => {
     try {
         const { blue, grey, black, white, purple } = req.body;
+        // query checks for current quantity and updates based on color
+        // then it adds based the quantity coming from req.body
         const result = await pool.query(
             `UPDATE Paints SET quantity = CASE
                 WHEN color = 'Blue' THEN quantity + $1
