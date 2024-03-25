@@ -16,7 +16,6 @@ const Login = () => {
   const { email, password } = credentials;
 
   const onCredentialsChange = (e) => {
-    console.log(e.target.name);
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   }
 

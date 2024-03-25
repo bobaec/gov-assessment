@@ -19,7 +19,7 @@ router.post('/update-subtract-by-one', authorized, async (req, res) => {
         const result = await pool.query(
             "UPDATE Paints SET quantity = quantity - 1 WHERE color = $1", [color]
         );
-        return res.json(true);
+        return res.json({ success: true });
     } catch (error) {
         console.log('paints/update', error.message);
     }
@@ -31,7 +31,7 @@ router.post('/update-add-by-one', authorized, async (req, res) => {
         const result = await pool.query(
             "UPDATE Paints SET quantity = quantity + 1 WHERE color = $1", [color]
         );
-        return res.json(true);
+        return res.json({ success: true });
     } catch (error) {
         console.log('paints/update', error.message);
     }
@@ -43,7 +43,7 @@ router.post('/update-single', authorized, async (req, res) => {
         const result = await pool.query(
             "UPDATE Paints SET quantity = $1 WHERE color = $2", [quantity, color]
         );
-        return res.json(true);
+        return res.json({ success: true });
     } catch (error) {
         console.log('paints/update', error.message);
     }
@@ -63,7 +63,7 @@ router.post('/update-bulk', authorized, async (req, res) => {
                 END
             `, [blue, grey, black, white, purple]
         );
-        return res.json(true);
+        return res.json({ success: true });
     } catch (error) {
         console.log('paints/update', error.message);
     }
